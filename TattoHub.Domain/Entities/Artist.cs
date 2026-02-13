@@ -29,7 +29,7 @@ namespace TattooHub.Domain.Entities
         public bool EstaActivo {  get; private set; }
 
         //Navegación (relaciones)
-        public List<PortfolioItem> PortfilioItems { get; private set; }
+        public List<PortfolioItem> PortfolioItems { get; private set; }
         public List<Design> Designs { get; private set; }
 
         private Artist()
