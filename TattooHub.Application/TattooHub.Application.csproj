@@ -11,4 +11,14 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="DTOs\Design\" />
+    <Folder Include="DTOs\Portfolio\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TattoHub.Domain\TattooHub.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
