@@ -63,7 +63,7 @@ namespace TattooHub.Domain.Entities
             MarkAsUpdated();
         }
 
-        public void SetPrice(decimal precio)
+        public void SetPrecio(decimal precio)
         {
             if(precio < 0)
                 throw new ArgumentException("El precio no puede ser negativo", nameof(precio));

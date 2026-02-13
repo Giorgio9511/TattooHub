@@ -35,7 +35,7 @@ namespace TattooHub.Domain.Entities
         private Artist()
         {
             //Constructor privado para EF Core
-            PortfilioItems = new List<PortfolioItem>();
+            PortfolioItems = new List<PortfolioItem>();
             Designs = new List<Design>();
             Especialidades = new List<TattooStyle>();
         }
@@ -56,7 +56,7 @@ namespace TattooHub.Domain.Entities
             SubscriptionTier = SubscriptionTier.Free;
             EstaActivo = true;
             Especialidades = new List<TattooStyle>();
-            PortfilioItems = new List<PortfolioItem>();
+            PortfolioItems = new List<PortfolioItem>();
             Designs = new List<Design>();
         }
 

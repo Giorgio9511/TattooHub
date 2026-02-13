@@ -60,7 +60,7 @@ namespace TattooHub.Application.Services
             if(artist == null) 
                 throw new ArtistNotFoundException(id);
 
-            return MapDto(artist);
+            return MapToDto(artist);
         }
 
         public async Task<IEnumerable<ArtistDto>> GetAllActiveArtistsAsync(
