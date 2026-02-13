@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TattoHub.Domain.Common;
+using TattooHub.Domain.Common;
 
-namespace TattoHub.Domain.Entities
+namespace TattooHub.Domain.Entities
 {
     //Representa un trabajo del portafolio de una artista
     public class PortfolioItem : BaseEntity

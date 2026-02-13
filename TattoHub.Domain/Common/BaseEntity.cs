@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TattoHub.Domain.Common
+namespace TattooHub.Domain.Common
 {
     public abstract class BaseEntity
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TattoHub.Domain.Exceptions
+namespace TattooHub.Domain.Exceptions
 {
     //Ecxepción base para errores del dominio
     public abstract class DomainException : Exception

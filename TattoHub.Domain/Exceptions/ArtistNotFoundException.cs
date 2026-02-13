@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TattoHub.Domain.Exceptions
+namespace TattooHub.Domain.Exceptions
 {
     public class ArtistNotFoundException : DomainException
     {

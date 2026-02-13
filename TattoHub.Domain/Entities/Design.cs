@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TattoHub.Domain.Common;
-using TattoHub.Domain.Enums;
+using TattooHub.Domain.Common;
+using TattooHub.Domain.Enums;
 
-namespace TattoHub.Domain.Entities
+namespace TattooHub.Domain.Entities
 {
     //Representa un diseño de tatuaje (flash) disponible para venta
     public class Design : BaseEntity

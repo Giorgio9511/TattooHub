@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TattoHub.Domain.Enums
+namespace TattooHub.Domain.Enums
 {
     public enum SubscriptionTier
     {
