@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TattooHub.Application.DTOs.Artist;
 using TattooHub.Application.Services;
@@ -18,6 +19,7 @@ namespace TattooHub.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllActive(CancellationToken cancellationToken)
         {
             var artist = await _artistService.GetAllActiveArtistsAsync(cancellationToken);
@@ -45,7 +47,7 @@ namespace TattooHub.API.Controllers
         {
             try
             {
-                var artist = await _artistService.CreateArtistAsync(dto, cancellationToken);
+                var artist = await _artistService.CreateArtistAsync("TEMP_USER_ID" , dto, cancellationToken);
                 return CreatedAtAction(nameof(GetById), new { id = artist.Id }, artist);
             }
             catch (InvalidOperationException ex)

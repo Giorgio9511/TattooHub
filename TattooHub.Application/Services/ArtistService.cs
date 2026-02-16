@@ -22,19 +22,14 @@ namespace TattooHub.Application.Services
         }
 
         public async Task<ArtistDto> CreateArtistAsync(
+            string userId,
             CreateArtistDto dto,
             CancellationToken cancellationToken = default)
         {
-            //Validar que el email no exista
-            if(await _unidadTrabajo.Artist.EmailExistsAsync(dto.Email, cancellationToken))
-            {
-                throw new InvalidOperationException("Ya existe un artista con ese email");
-            }
-
             //Crear la entidad del dominio
             var artist = new Artist(
+                userId,
                 dto.NombreCompleto,
-                dto.Email,
                 dto.NombreEstudio,
                 dto.DireccionEstudio);
 
@@ -118,12 +113,12 @@ namespace TattooHub.Application.Services
             return new ArtistDto
             {
                 Id = artist.Id,
+                UserId = artist.UserId,
                 NombreCompleto = artist.NombreCompleto,
-                Email = artist.Email,
                 Telefono = artist.Telefono,
                 Bio = artist.Bio,
                 NombreEstudio = artist.NombreEstudio,
-                DireccionEstudio = artist.NombreEstudio,
+                DireccionEstudio = artist.DireccionEstudio,
                 Instagram = artist.Instagram,
                 Especialidades = artist.Especialidades,
                 SubscriptionTier = artist.SubscriptionTier,

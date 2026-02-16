@@ -11,8 +11,8 @@ namespace TattooHub.Application.DTOs.Artist
     public class ArtistDto
     {
         public Guid Id { get; set; }
+        public string UserId { get; set; }
         public string NombreCompleto { get; set; } = string.Empty;
-        public string Email { get; set; } =string.Empty;
         public string? Telefono { get; set; }
         public string? Bio { get; set; }
         public string NombreEstudio { get; set; } = string.Empty;

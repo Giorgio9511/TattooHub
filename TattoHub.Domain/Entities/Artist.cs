@@ -13,9 +13,9 @@ namespace TattooHub.Domain.Entities
     {
         //Información basica
         public string NombreCompleto { get; private set; }
-        public string Email { get; private set; }
         public string? Telefono { get; private set; }
         public string? Bio {  get; private set; }
+        public string UserId { get; private set; }
 
         //Configuración profesional
         public string NombreEstudio { get; private set; }
@@ -42,14 +42,14 @@ namespace TattooHub.Domain.Entities
 
         //Constructor para crear un nuevo artista
         public Artist(
+            string userId,
             string nombreCompleto,
-            string email,
             string nombreEstudio,
             string direccionEstudio)
             : base ()
         {
+            UserId = userId;
             SetNombreCompleto(nombreCompleto);
-            SetEmail(email);
             NombreEstudio = nombreEstudio;
             DireccionEstudio = direccionEstudio;
 
@@ -70,17 +70,6 @@ namespace TattooHub.Domain.Entities
                 throw new ArgumentException("El nombre debe tener al menos 3 caracteres", nameof(nombreCompleto));
 
             NombreCompleto = nombreCompleto;
-            MarkAsUpdated();
-        }
-
-        public void SetEmail(string email)
-        {
-            if(string.IsNullOrWhiteSpace(email))
-                throw new ArgumentException("El email es requerido", nameof(email));
-            if (!email.Contains("@"))
-                throw new ArgumentException("Email invalido", nameof(email));
-
-            Email = email.ToLowerInvariant();
             MarkAsUpdated();
         }
 

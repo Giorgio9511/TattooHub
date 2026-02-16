@@ -17,10 +17,6 @@ namespace TattooHub.Application.Validators
                 .MinimumLength(3).WithMessage("El nombre debe tener al menos 3 caracteres")
                 .MaximumLength(100).WithMessage("El nombre no puede exceder los 100 caracteres");
 
-            RuleFor(x => x.Email)
-                .NotEmpty().WithMessage("El email es requerido")
-                .EmailAddress().WithMessage("Email inválido");
-
             RuleFor(x => x.NombreEstudio)
                 .NotEmpty().WithMessage("El nombre del estudio es requerido")
                 .MaximumLength(200);

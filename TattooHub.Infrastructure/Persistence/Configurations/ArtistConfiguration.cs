@@ -22,13 +22,6 @@ namespace TattooHub.Infrastructure.Persistence.Configurations
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(a => a.Email)
-                .IsRequired()
-                .HasMaxLength(255);
-
-            builder.HasIndex(a => a.Email)
-                .IsUnique();
-
             builder.Property(a => a.Bio)
                 .HasMaxLength(500);
 
