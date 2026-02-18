@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TattooHub.Application.DTOs.Artist;
+using TattooHub.Application.DTOs.Auth;
 using TattooHub.Application.Interfaces.Persistence;
+using TattooHub.Application.Interfaces.Services;
 using TattooHub.Domain.Entities;
 using TattooHub.Domain.Exceptions;
 
@@ -15,17 +17,25 @@ namespace TattooHub.Application.Services
     public class ArtistService
     {
         private readonly IUnitOfWork _unidadTrabajo;
+        private readonly IIdentityService _identityService;
 
-        public ArtistService(IUnitOfWork unidadTrabajo)
+        public ArtistService(IUnitOfWork unidadTrabajo, IIdentityService identityService)
         {
             _unidadTrabajo = unidadTrabajo;
+            _identityService = identityService;
         }
 
         public async Task<ArtistDto> CreateArtistAsync(
-            string userId,
             CreateArtistDto dto,
             CancellationToken cancellationToken = default)
         {
+            if (await _identityService.UserExistsAsync(dto.Email))
+                throw new InvalidOperationException("Usuario ya existe");
+
+            var userId = await _identityService.CreateUserAsync(dto.Email, dto.Password);
+
+            await _identityService.AddUserToRoleAsync(userId, "Artist");
+
             //Crear la entidad del dominio
             var artist = new Artist(
                 userId,

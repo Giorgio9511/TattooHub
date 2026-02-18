@@ -10,8 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TattooHub.Application.Interfaces.Persistence;
+using TattooHub.Application.Interfaces.Services;
 using TattooHub.Infrastructure.Identity;
 using TattooHub.Infrastructure.Persistence;
+using TattooHub.Infrastructure.Services;
 
 namespace TattooHub.Infrastructure
 {
@@ -32,6 +34,8 @@ namespace TattooHub.Infrastructure
                 .AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped<IIdentityService, IdentityService>();
 
             //JWT
             var jwtSettings = configuration.GetSection("JwtSettings");
@@ -56,7 +60,7 @@ namespace TattooHub.Infrastructure
                 };
             });
 
-            services.AddScoped<JwtTokenGenerator>();
+            services.AddScoped<IJwtTokenGenerator ,JwtTokenGenerator>();
 
             //Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -1,6 +1,7 @@
 using TattooHub.Application.Services;
 using FluentValidation;
 using TattooHub.Infrastructure;
+using TattooHub.Infrastructure.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 //ApplicationServices
 builder.Services.AddScoped<ArtistService>();
+builder.Services.AddScoped<AuthService>();
 
 //FluentValidation
 builder.Services.AddValidatorsFromAssemblyContaining<TattooHub.Application.AssemblyReference>();
@@ -58,6 +60,12 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+using(var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;   
+    await Seeding.SeedAsync(services);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -10,6 +10,8 @@ namespace TattooHub.Application.DTOs.Artist
     public class CreateArtistDto
     {
         public string NombreCompleto { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Password {  get; set; } = string.Empty;
         public string? Telefono { get; set; }
         public string NombreEstudio { get; set; } = string.Empty;
         public string DireccionEstudio { get; set; } = string.Empty;

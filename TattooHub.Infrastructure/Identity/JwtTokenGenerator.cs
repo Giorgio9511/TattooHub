@@ -7,10 +7,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using TattooHub.Application.Interfaces.Services;
 
 namespace TattooHub.Infrastructure.Identity
 {
-    public class JwtTokenGenerator
+    public class JwtTokenGenerator : IJwtTokenGenerator
     {
         private readonly IConfiguration _configuration;
 
@@ -19,14 +20,14 @@ namespace TattooHub.Infrastructure.Identity
             _configuration = configuration;
         }
 
-        public string GenerateToken(ApplicationUser user, IList<string> roles)
+        public string GenerateToken(string userId, string email, IList<string> roles)
         {
             var jwtSettings = _configuration.GetSection("JwtSettings");
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Email, user.Email!)
+                new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim(ClaimTypes.Email, email!)
             };
 
             foreach (var role in roles)

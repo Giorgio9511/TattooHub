@@ -5,10 +5,11 @@ using TattooHub.Application.DTOs.Artist;
 using TattooHub.Application.Services;
 using TattooHub.Domain.Exceptions;
 
-namespace TattooHub.API.Controllers
+namespace TattooHub.API.Controllers.Admin
 {
-    [Route("api/[controller]")]
+    [Route("api/admin/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "Admin")]
     public class ArtistController : ControllerBase
     {
         private readonly ArtistService _artistService;
@@ -19,7 +20,6 @@ namespace TattooHub.API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAllActive(CancellationToken cancellationToken)
         {
             var artist = await _artistService.GetAllActiveArtistsAsync(cancellationToken);
@@ -47,7 +47,7 @@ namespace TattooHub.API.Controllers
         {
             try
             {
-                var artist = await _artistService.CreateArtistAsync("TEMP_USER_ID" , dto, cancellationToken);
+                var artist = await _artistService.CreateArtistAsync(dto, cancellationToken);
                 return CreatedAtAction(nameof(GetById), new { id = artist.Id }, artist);
             }
             catch (InvalidOperationException ex)

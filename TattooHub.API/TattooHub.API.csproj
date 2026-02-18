@@ -19,4 +19,8 @@
     <ProjectReference Include="..\TattooHub.Infrastructure\TattooHub.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Artist\" />
+  </ItemGroup>
+
 </Project>
