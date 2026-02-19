@@ -9,9 +9,10 @@ import Login from './pages/auth/Login';
 import Home from './pages/Home';
 import Register from './pages/auth/Register';
 import ArtistDashboard from './pages/artist/Dasboard';
+import PrivateRoute from './components/AuthRoutes/PrivateRoute';
 
 function App() {
-  const {isAuthenticated, logout} = useAuth();
+  const {isAuthenticated, logout, user} = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -26,7 +27,12 @@ function App() {
             <Link to='/home'>TATTOOHUB</Link>
             <div className='link-group'>
               {isAuthenticated ? (
-                <button onClick={handleLogout}>Logout</button>
+                <>
+                  <span className='saludo'>
+                    Hola {user?.email}
+                  </span>
+                  <button className='logout-btn' onClick={handleLogout}>Logout</button>
+                </>
               ) : (
                 <>
                   <Link to='/auth/login'>Login</Link>
@@ -46,7 +52,11 @@ function App() {
               <Route path='/home' element={<Home/>}/>
               
               {/* Administrador */}
-              <Route path="/admin/artists" element={<ArtistList />} />
+              <Route path="/admin/artists" element={
+                <PrivateRoute>
+                    <ArtistList />
+                </PrivateRoute>} 
+              />
               <Route path="/admin/artists/create" element={<CreateArtist />} />
               <Route path="/admin/artists/edit/:id" element={<EditArtist />} />
               
