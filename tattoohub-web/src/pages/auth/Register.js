@@ -1,6 +1,7 @@
 import { authApi } from "../../api/authApi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import '../../styles/Register.css';
 
 function Register() {
@@ -10,6 +11,8 @@ function Register() {
     const [nombreEstudio, setNombreEstudio] = useState("");
     const [direccionEstudio, setDireccionEstudio] = useState("");
 
+
+    const {login} = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -28,10 +31,12 @@ function Register() {
         const role = roles[0];
         console.log(response.data);
 
-        localStorage.setItem("token", token);
-        localStorage.setItem("userEmail", userEmail);
-        localStorage.setItem("userId", userId);
-        localStorage.setItem("role", role);
+        login({
+                token,
+                email: userEmail,
+                role,
+                userId
+            });
 
         navigate("/artist/dashboard");
         } catch(error) {

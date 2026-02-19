@@ -1,5 +1,6 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useNavigate } from "react-router-dom";
+import { useAuth } from './context/AuthContext';
 
 import ArtistList from './pages/admin/ArtistsList';
 import CreateArtist from './pages/admin/CreateArtist';
@@ -10,44 +11,55 @@ import Register from './pages/auth/Register';
 import ArtistDashboard from './pages/artist/Dasboard';
 
 function App() {
+  const {isAuthenticated, logout} = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/auth/login");
+  }
+
   return (
-    <BrowserRouter>
-      <div className="App">
-        
-        <div className='barra-navegacion'>
-          <Link to='/home'>TATTOOHUB</Link>
-          <div className='link-group'>
-            <Link to='/auth/login'>Login</Link>
-            <Link to='/auth/register'>Registrarme</Link>
+        <div className="App">
+          
+          <div className='barra-navegacion'>
+            <Link to='/home'>TATTOOHUB</Link>
+            <div className='link-group'>
+              {isAuthenticated ? (
+                <button onClick={handleLogout}>Logout</button>
+              ) : (
+                <>
+                  <Link to='/auth/login'>Login</Link>
+                  <Link to='/auth/register'>Registrarme</Link>          
+                </>
+              )}
+              </div>
           </div>
+
+          <header>
+
+          </header>
+
+          <main>
+            <Routes>
+              {/* Inicio */}
+              <Route path='/home' element={<Home/>}/>
+              
+              {/* Administrador */}
+              <Route path="/admin/artists" element={<ArtistList />} />
+              <Route path="/admin/artists/create" element={<CreateArtist />} />
+              <Route path="/admin/artists/edit/:id" element={<EditArtist />} />
+              
+              {/* Artista */}
+              <Route path='/artist/dashboard' element={<ArtistDashboard/>}/>
+
+              {/* Autenticación */}
+              <Route path='/auth/login' element={<Login/>}/>
+              <Route path='/auth/register' element={<Register/>}/>
+            </Routes>
+          </main>
+
         </div>
-
-        <header>
-
-        </header>
-
-        <main>
-          <Routes>
-            {/* Inicio */}
-            <Route path='/home' element={<Home/>}/>
-            
-            {/* Administrador */}
-            <Route path="/admin/artists" element={<ArtistList />} />
-            <Route path="/admin/artists/create" element={<CreateArtist />} />
-            <Route path="/admin/artists/edit/:id" element={<EditArtist />} />
-            
-            {/* Artista */}
-            <Route path='/artist/dashboard' element={<ArtistDashboard/>}/>
-
-            {/* Autenticación */}
-            <Route path='/auth/login' element={<Login/>}/>
-            <Route path='/auth/register' element={<Register/>}/>
-            <Route path='/auth/register' element={<Register/>}/>
-          </Routes>
-        </main>
-
-      </div>
-    </BrowserRouter>
   );
 }
 

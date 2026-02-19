@@ -1,12 +1,14 @@
 import { authApi } from "../../api/authApi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import '../../styles/Login.css';
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const {login} = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,10 +23,12 @@ function Login() {
             const role = roles[0];
             console.log(response.data);
 
-            localStorage.setItem("token", token);
-            localStorage.setItem("userEmail", userEmail);
-            localStorage.setItem("userId", userId);
-            localStorage.setItem("role", role);
+            login({
+                token,
+                email: userEmail,
+                role,
+                userId
+            });
 
             if(role === "Admin"){
                 navigate("/admin/dashboard");
